@@ -1,0 +1,4 @@
+{"id": 603, "results": {
+  "FR": {"link": "https://www.themoviedb.org/movie/603-the-matrix/watch?locale=FR", "flatrate": [{"logo_path": "/logo-a.jpg", "provider_id": 1, "provider_name": "Example Stream", "display_priority": 1}], "rent": [{"logo_path": "/logo-b.jpg", "provider_id": 2, "provider_name": "Example Video", "display_priority": 2}], "buy": [{"logo_path": "/logo-b.jpg", "provider_id": 2, "provider_name": "Example Video", "display_priority": 2}]},
+  "US": {"link": "https://www.themoviedb.org/movie/603-the-matrix/watch?locale=US", "free": [{"logo_path": null, "provider_id": 3, "provider_name": "Example Free", "display_priority": 1}]}
+}}

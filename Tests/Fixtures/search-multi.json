@@ -1,0 +1,5 @@
+{"page": 1, "total_pages": 1, "total_results": 3, "results": [
+  {"id": 1920, "media_type": "tv", "name": "Twin Peaks", "original_name": "Twin Peaks", "first_air_date": "1990-04-08", "origin_country": ["US"], "original_language": "en", "poster_path": "/poster-1920.jpg", "vote_average": 8.3, "vote_count": 2000},
+  {"id": 1923, "media_type": "movie", "title": "Twin Peaks: Fire Walk with Me", "original_title": "Twin Peaks: Fire Walk with Me", "release_date": "1992-05-16", "original_language": "en", "vote_average": 7.2, "vote_count": 1800},
+  {"id": 2, "media_type": "person", "name": "Not a work"}
+]}

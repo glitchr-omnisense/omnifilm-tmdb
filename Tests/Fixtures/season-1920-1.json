@@ -1,0 +1,4 @@
+{"_id": "season", "air_date": "1990-04-08", "name": "Season 1", "season_number": 1, "id": 5500, "episodes": [
+  {"air_date": "1990-04-08", "episode_number": 1, "id": 90001, "name": "Pilot", "overview": "The body of Laura Palmer is found.", "runtime": 94, "season_number": 1, "show_id": 1920, "still_path": "/still-90001.jpg", "vote_average": 8.5, "vote_count": 40, "crew": [], "guest_stars": []},
+  {"air_date": "1990-04-12", "episode_number": 2, "id": 90002, "name": "Traces to Nowhere", "overview": "", "runtime": 47, "season_number": 1, "show_id": 1920, "still_path": null, "vote_average": 0, "vote_count": 0, "crew": [], "guest_stars": []}
+]}

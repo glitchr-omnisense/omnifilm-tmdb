@@ -1,0 +1,3 @@
+{"id": 1920, "name": "Twin Peaks", "original_name": "Twin Peaks", "first_air_date": "1990-04-08", "episode_run_time": [47], "genres": [{"id": 9648, "name": "Mystery"}, {"id": 18, "name": "Drama"}], "number_of_seasons": 3, "origin_country": ["US"], "original_language": "en", "spoken_languages": [{"iso_639_1": "en", "name": "English"}], "overview": "An FBI agent investigates a murder in a small town.", "poster_path": "/poster-1920.jpg", "backdrop_path": null, "vote_average": 8.3, "vote_count": 2000,
+ "credits": {"cast": [{"id": 6677, "name": "Kyle MacLachlan", "character": "Dale Cooper", "order": 0}], "crew": []},
+ "external_ids": {"imdb_id": "tt0098936", "tvdb_id": 70533, "wikidata_id": "Q2085"}}

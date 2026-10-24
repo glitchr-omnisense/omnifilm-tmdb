@@ -1,0 +1,15 @@
+{"adult": false, "backdrop_path": "/backdrop-603.jpg", "genres": [{"id": 28, "name": "Action"}, {"id": 878, "name": "Science Fiction"}], "id": 603, "imdb_id": "tt0133093", "original_language": "en", "original_title": "The Matrix", "overview": "A computer hacker learns about the true nature of reality.", "poster_path": "/poster-603.jpg",
+ "production_countries": [{"iso_3166_1": "US", "name": "United States of America"}, {"iso_3166_1": "AU", "name": "Australia"}], "release_date": "1999-03-31", "runtime": 136, "spoken_languages": [{"english_name": "English", "iso_639_1": "en", "name": "English"}], "status": "Released", "title": "The Matrix", "vote_average": 8.2, "vote_count": 26000,
+ "credits": {"cast": [
+   {"id": 6384, "name": "Keanu Reeves", "character": "Thomas A. Anderson / Neo", "order": 0},
+   {"id": 2975, "name": "Laurence Fishburne", "character": "Morpheus", "order": 1},
+   {"id": 530, "name": "Carrie-Anne Moss", "character": "Trinity", "order": 2}
+ ], "crew": [
+   {"id": 9340, "name": "Lana Wachowski", "department": "Directing", "job": "Director"},
+   {"id": 9339, "name": "Lilly Wachowski", "department": "Directing", "job": "Director"},
+   {"id": 9340, "name": "Lana Wachowski", "department": "Writing", "job": "Writer"},
+   {"id": 1091, "name": "Joel Silver", "department": "Production", "job": "Producer"},
+   {"id": 4949, "name": "Don Davis", "department": "Sound", "job": "Original Music Composer"},
+   {"id": 1000, "name": "Someone Else", "department": "Camera", "job": "Gaffer"}
+ ]},
+ "external_ids": {"imdb_id": "tt0133093", "wikidata_id": "Q83495", "facebook_id": null}}
