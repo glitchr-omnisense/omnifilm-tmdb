@@ -5,7 +5,7 @@ namespace Omnifilm\Tmdb\Tests;
 use Omnifilm\Testing\BareTestCase;
 use Omnifilm\Tmdb\TmdbProvider;
 
-/** omnifilm/tmdb's classes load with omniscient/omnifilm, php-tmdb/api and the PSR interfaces alone. */
+/** omnifilm/tmdb's classes load with omnisense/omnifilm, php-tmdb/api and the PSR interfaces alone. */
 final class BareTest extends BareTestCase
 {
     protected static function entryClass(): string

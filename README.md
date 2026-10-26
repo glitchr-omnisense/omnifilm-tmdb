@@ -1,6 +1,6 @@
 # omnifilm/tmdb
 
-[omniscient/omnifilm](https://github.com/glitchr-studio/omnifilm)'s The Movie Database, under any PHP
+[omnisense/omnifilm](https://github.com/glitchr-omnisense/omnifilm)'s The Movie Database, under any PHP
 host, over [php-tmdb/api](https://github.com/php-tmdb/api):
 
 - **search** of films, series or both (`/search/movie`, `/search/tv`, `/search/multi`);
