@@ -3,6 +3,8 @@
 ## Unreleased (1.x)
 
 ### Fixed
+- A refusal (`ProviderException`, TMDB's 401) keeps no argument in its trace: the closure there held
+  the provider, its client and its key or token.
 - An `UnreachableException`'s chain no longer holds the key or the token: its previous is a copy
   of the PSR-18 client's exception (the same class and code, `api_key=***` in its message, its own
   previous copied too), and no trace of the chain keeps the arguments where the request stood.

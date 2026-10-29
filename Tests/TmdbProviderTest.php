@@ -175,6 +175,32 @@ final class TmdbProviderTest extends TestCase
         }
     }
 
+    /**
+     * TMDB refusing the key or the token: the ProviderException keeps no argument in its trace (the
+     * closure there held the provider, its client and its token), so a log of it
+     * (zend.exception_ignore_args off) holds neither.
+     */
+    public function testARefusalKeepsNoCredentialInItsTrace(): void
+    {
+        $ignoreArgs = ini_set('zend.exception_ignore_args', '0');
+        $http = new MockHttpClient(static fn (): MockResponse => new MockResponse('{"status_code": 7, "status_message": "Invalid API key: You must be granted a valid key.", "success": false}', ['http_code' => 401, 'response_headers' => ['content-type' => 'application/json']]));
+        try {
+            foreach ([['api_key' => 'not-a-real-tmdb-key', 'token' => null], ['token' => 'not-a-real-tmdb-token']] as $options) {
+                try {
+                    self::provider($http, $options)->work(WorkRef::tmdb(603));
+                    self::fail('no exception');
+                } catch (\Omnifilm\Exception\ProviderException $e) {
+                    foreach (['not-a-real-tmdb-key', 'not-a-real-tmdb-token'] as $secret) {
+                        self::assertFalse(str_contains($e->getMessage(), $secret), $e->getMessage());
+                        self::assertFalse(str_contains(print_r($e->getTrace(), true), $secret), 'the trace holds '.$secret);
+                    }
+                }
+            }
+        } finally {
+            ini_set('zend.exception_ignore_args', false !== $ignoreArgs ? $ignoreArgs : '1');
+        }
+    }
+
     /** The attribution is the wording TMDB's API terms ask for (https://www.themoviedb.org/api-terms-of-use, the README quotes it). */
     public function testTheAttributionIsTheTermsWording(): void
     {

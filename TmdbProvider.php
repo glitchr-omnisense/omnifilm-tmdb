@@ -185,7 +185,8 @@ final class TmdbProvider implements ProviderInterface, SearchInterface, LookupIn
             if (404 === $status || 34 === $e->getCode()) {
                 return null;
             }
-            throw ProviderException::answered('TMDB', 'GET '.$e->getRequest()->getUri()->getPath(), $status, $e->getMessage());
+            // No trace argument: the closure there holds this provider, its client and its key or token.
+            throw Redaction::withoutArguments(ProviderException::answered('TMDB', 'GET '.$e->getRequest()->getUri()->getPath(), $status, $e->getMessage()));
         } catch (ClientExceptionInterface $e) {
             // The path only: with the api_key option, the key travels in the query the client's message quotes.
             $request = method_exists($e, 'getRequest') ? $e->getRequest() : null;
