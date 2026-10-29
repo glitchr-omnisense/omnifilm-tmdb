@@ -9,6 +9,7 @@ use Omnifilm\Exception\NotSupportedException;
 use Omnifilm\Exception\ProviderException;
 use Omnifilm\Exception\UnreachableException;
 use Omnifilm\Http\Data;
+use Omnifilm\Http\JsonClient;
 use Omnifilm\LookupInterface;
 use Omnifilm\Model\Credit;
 use Omnifilm\Model\Identifiers;
@@ -26,6 +27,7 @@ use Omnifilm\Model\WorkType;
 use Omnifilm\ProviderInterface;
 use Omnifilm\SearchInterface;
 use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Message\RequestInterface;
 use Tmdb\Client;
 use Tmdb\Exception\TmdbApiException;
 
@@ -183,7 +185,11 @@ final class TmdbProvider implements ProviderInterface, SearchInterface, LookupIn
             }
             throw ProviderException::answered('TMDB', 'GET '.$e->getRequest()->getUri()->getPath(), $status, $e->getMessage());
         } catch (ClientExceptionInterface $e) {
-            throw new UnreachableException('TMDB could not be reached: '.$e->getMessage(), 0, $e);
+            // The path only: with the api_key option, the key travels in the query the client's message quotes.
+            $request = method_exists($e, 'getRequest') ? $e->getRequest() : null;
+            $what = $request instanceof RequestInterface ? ' for '.$request->getMethod().' '.($request->getUri()->getPath() ?: '/') : '';
+
+            throw new UnreachableException('TMDB could not be reached'.$what.': '.JsonClient::reason($e->getMessage()), 0, $e);
         }
     }
 

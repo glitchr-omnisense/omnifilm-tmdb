@@ -188,15 +188,15 @@ services:
 
 - a status of 400 or more but 404: `ProviderException` naming the path and TMDB's message (`TMDB
   answered 401 for GET /3/movie/603. ...`);
-- a network error: `UnreachableException` (`TMDB could not be reached: ...`);
+- a network error: `UnreachableException` naming the method and the path, then the HTTP client's
+  reason without the URL (`TMDB could not be reached for GET /3/movie/603: Could not resolve host:
+  api.themoviedb.org.`): the `api_key` stays out of it;
 - neither `token` nor `api_key`: `InvalidConfigException` when the provider is built;
 - an episode by its TMDB number, a film by its TheTVDB or Trakt number: `NotSupportedException`
   before any call.
 
-> [!WARNING]
-> Known defect: with `api_key`, an `UnreachableException`'s message quotes the whole URL, the key
-> included (`... for "https://api.themoviedb.org/3/movie/603?api_key=SECRET-KEY&..."`, seen in a
-> container with no network, 2026-10-26), where the family keeps keys out of messages. Use `token`.
+The exception's previous, the PSR-18 client's, still quotes the URL; `token`, which travels in a
+header, keeps the key out of URLs altogether.
 
 ## Verified, and not
 

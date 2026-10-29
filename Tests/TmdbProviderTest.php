@@ -126,6 +126,23 @@ final class TmdbProviderTest extends TestCase
         self::provider($http)->work(WorkRef::tmdb(603));
     }
 
+    /** With the api_key option the key travels in the query: an unreachable TMDB names the path, never the key. */
+    public function testTheKeyStaysOutOfAnUnreachableMessage(): void
+    {
+        $http = new MockHttpClient(static function (string $method, string $url): never {
+            throw new \Symfony\Component\HttpClient\Exception\TransportException(\sprintf('Could not resolve host: api.themoviedb.org for "%s".', $url));
+        });
+
+        try {
+            self::provider($http, ['api_key' => 'not-a-real-tmdb-key', 'token' => null])->work(WorkRef::tmdb(603));
+            self::fail('no exception');
+        } catch (\Omnifilm\Exception\UnreachableException $e) {
+            self::assertStringNotContainsString('not-a-real-tmdb-key', $e->getMessage());
+            self::assertStringNotContainsString('api_key', $e->getMessage());
+            self::assertStringContainsString('GET /3/movie/603', $e->getMessage());
+        }
+    }
+
     public function testATokenOrAKeyIsRequired(): void
     {
         $this->expectException(InvalidConfigException::class);
