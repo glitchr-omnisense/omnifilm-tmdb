@@ -70,14 +70,9 @@ A TMDB account's API settings give two credentials; either does:
 | `AvailabilityInterface` | yes (JustWatch's data) |
 | images, credits | yes; a key is needed |
 
-`attribution`: `This product uses the TMDB API but is not endorsed or certified by TMDB. Where to
-watch: data from JustWatch.`
-
-> [!WARNING]
-> Known defect: the `attribution` string is not the wording TMDB's terms ask for, which the
-> package's README quotes: "uses TMDB and the TMDB APIs but is not endorsed, certified, or
-> otherwise approved by TMDB", with TMDB's logo, less prominent than the application's own. Show
-> the terms' wording.
+`attribution`: `This product uses TMDB and the TMDB APIs but is not endorsed, certified, or
+otherwise approved by TMDB. Where to watch: data from JustWatch.` - the wording TMDB's terms ask
+for, which the README quotes; show it with TMDB's logo, less prominent than the application's own.
 
 ## Behaviour
 

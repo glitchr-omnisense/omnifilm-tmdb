@@ -74,7 +74,8 @@ final class TmdbProvider implements ProviderInterface, SearchInterface, LookupIn
             ],
             images: true,
             credits: true,
-            attribution: 'This product uses the TMDB API but is not endorsed or certified by TMDB. Where to watch: data from JustWatch.',
+            // The wording TMDB's API terms ask for, with TMDB's logo less prominent than the application's own.
+            attribution: 'This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB. Where to watch: data from JustWatch.',
             terms: ['https://www.themoviedb.org/api-terms-of-use', 'https://developer.themoviedb.org/docs/faq', 'https://www.justwatch.com'],
         );
     }

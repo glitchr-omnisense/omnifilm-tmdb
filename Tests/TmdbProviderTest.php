@@ -143,6 +143,12 @@ final class TmdbProviderTest extends TestCase
         }
     }
 
+    /** The attribution is the wording TMDB's API terms ask for (https://www.themoviedb.org/api-terms-of-use, the README quotes it). */
+    public function testTheAttributionIsTheTermsWording(): void
+    {
+        self::assertStringStartsWith('This product uses TMDB and the TMDB APIs but is not endorsed, certified, or otherwise approved by TMDB.', (string) self::provider(self::http())->capabilities()->attribution);
+    }
+
     public function testATokenOrAKeyIsRequired(): void
     {
         $this->expectException(InvalidConfigException::class);
