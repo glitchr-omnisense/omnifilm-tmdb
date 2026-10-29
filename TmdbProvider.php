@@ -10,6 +10,7 @@ use Omnifilm\Exception\ProviderException;
 use Omnifilm\Exception\UnreachableException;
 use Omnifilm\Http\Data;
 use Omnifilm\Http\JsonClient;
+use Omnifilm\Http\Redaction;
 use Omnifilm\LookupInterface;
 use Omnifilm\Model\Credit;
 use Omnifilm\Model\Identifiers;
@@ -190,7 +191,10 @@ final class TmdbProvider implements ProviderInterface, SearchInterface, LookupIn
             $request = method_exists($e, 'getRequest') ? $e->getRequest() : null;
             $what = $request instanceof RequestInterface ? ' for '.$request->getMethod().' '.($request->getUri()->getPath() ?: '/') : '';
 
-            throw new UnreachableException('TMDB could not be reached'.$what.': '.JsonClient::reason($e->getMessage()), 0, $e);
+            // Its previous a copy of the client's, the key masked; no trace keeps the request it was given.
+            $secrets = $request instanceof RequestInterface ? Redaction::secrets((string) $request->getUri(), ['headers' => $request->getHeaders()]) : [];
+
+            throw Redaction::withoutArguments(new UnreachableException('TMDB could not be reached'.$what.': '.JsonClient::reason($e->getMessage()), 0, Redaction::copy($e, $secrets)));
         }
     }
 

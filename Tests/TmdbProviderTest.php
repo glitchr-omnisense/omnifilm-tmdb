@@ -143,6 +143,38 @@ final class TmdbProviderTest extends TestCase
         }
     }
 
+    /**
+     * Nothing of the key or the token in a log of the whole chain: the messages, the previous
+     * exceptions (copies of the PSR-18 client's and Symfony's), the traces' arguments - which
+     * held the request, headers and query - when zend.exception_ignore_args is off.
+     */
+    public function testNoPartOfAnUnreachableChainHoldsTheKeyOrTheToken(): void
+    {
+        $ignoreArgs = ini_set('zend.exception_ignore_args', '0');
+        $http = new MockHttpClient(static function (string $method, string $url): never {
+            throw new \Symfony\Component\HttpClient\Exception\TransportException(\sprintf('Could not resolve host: api.themoviedb.org for "%s".', $url));
+        });
+
+        try {
+            foreach ([['api_key' => 'not-a-real-tmdb-key', 'token' => null], ['token' => 'not-a-real-tmdb-token']] as $options) {
+                try {
+                    self::provider($http, $options)->work(WorkRef::tmdb(603));
+                    self::fail('no exception');
+                } catch (\Omnifilm\Exception\UnreachableException $e) {
+                    self::assertNotNull($e->getPrevious());
+                    for ($one = $e; null !== $one; $one = $one->getPrevious()) {
+                        foreach (['not-a-real-tmdb-key', 'not-a-real-tmdb-token'] as $secret) {
+                            self::assertStringNotContainsString($secret, $one->getMessage());
+                            self::assertStringNotContainsString($secret, print_r($one->getTrace(), true));
+                        }
+                    }
+                }
+            }
+        } finally {
+            ini_set('zend.exception_ignore_args', false !== $ignoreArgs ? $ignoreArgs : '1');
+        }
+    }
+
     /** The attribution is the wording TMDB's API terms ask for (https://www.themoviedb.org/api-terms-of-use, the README quotes it). */
     public function testTheAttributionIsTheTermsWording(): void
     {
